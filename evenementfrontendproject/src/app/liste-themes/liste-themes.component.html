@@ -1,0 +1,33 @@
+<div class="container">
+
+    <app-update-theme 
+        [theme]="updatedTh" 
+        [ajout]="ajout"
+        (themeUpdated)="themeUpdated($event)">
+    </app-update-theme>
+
+    <div></div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom Theme</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let th of themes">
+                    <tr>
+                        <td>{{th.idTheme}}</td>
+                        <td>{{th.nomTheme}}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" (click)="updateTheme(th)">
+                                Modifier
+                            </button>
+                          </td>
+                                              </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

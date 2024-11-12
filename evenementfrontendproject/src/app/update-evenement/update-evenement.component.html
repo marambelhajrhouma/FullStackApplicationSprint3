@@ -1,0 +1,38 @@
+<div class="container">
+    <div>
+        <h2>Modifier un Evenement :</h2>
+    </div>
+    <form>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID Evenement</label>
+            <input readonly type="text" [(ngModel)]="currentEvenement.idEvenement" name="idEvenement"
+                class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nom Evenement</label>
+            <input type="text" [(ngModel)]="currentEvenement.nomEvenement" name="nomEvenement" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Prix Evenement</label>
+            <input type="number" [(ngModel)]="currentEvenement.prixEvenement" name="prixEvenement" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Date création</label>
+            <!-- Two-way binding using ngModel -->
+            <input type="date" [ngModel]="currentEvenement.dateEvenement | date: 'yyyy-MM-dd'"
+            (ngModelChange)="currentEvenement.dateEvenement = $event" 
+            name="dateEvenement" 
+            class="form-control">
+        </div>
+        
+        <div class="col-sm-4 col-md-4 col-lg-4"> 
+            <select class="form-control form-control-lg" id="idTheme" name="idTheme" [(ngModel)]="updateThemeId">
+                <option *ngFor="let theme of themes" [value]="theme.idTheme"> {{theme.nomTheme}} </option>
+            </select> 
+        </div>
+
+        <div class="mt-2">
+            <button type="submit" (click)="updateEvenement()" class="btn btn-success">Modifier</button>
+        </div>
+    </form>
+</div>

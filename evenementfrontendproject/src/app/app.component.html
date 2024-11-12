@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Gestion des Produits</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Gestion Produits</a>
+        
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/evenements">Home</a>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Produits</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/addEvenement" *ngIf="authService.isAdmin()">Ajouter</a>
+                    <a class="dropdown-item" href="#">Lister</a>
+                    <a class="dropdown-item" routerLink="RechercheParTheme">Recherche Par Theme</a>
+                    <a class="dropdown-item" routerLink="/rechercheParNom" >Recherche Par Nom</a>
+                    <a class="dropdown-item" routerLink="/listeThemes" >Gestion des themes</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li> <a class="nav-link"></a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">[{{authService.loggedUser}}]</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" router-Link="/login" *ngIf="!authService.isloggedIn" >Login</a>
+                    <a class="dropdown-item" *ngIf="authService.isloggedIn"  (click)="onLogout()">Logout</a>
+                    <a class="dropdown-item" href="#">Profile</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    
+    <router-outlet></router-outlet>
+</body>
+</html>

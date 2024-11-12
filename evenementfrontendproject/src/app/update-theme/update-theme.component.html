@@ -1,0 +1,16 @@
+<form>
+    <div [hidden]="ajout">
+        <label>ID Theme</label>
+        <input type="text" [(ngModel)]="theme.idTheme" name="idTheme" class="form-control w-25">
+    </div>
+    <div>
+        <label>Nom Theme</label>
+        <input type="text" [(ngModel)]="theme.nomTheme" name="nomTheme" class="form-control"
+            placeholder="Entrez un nom de Theme...">
+    </div>
+    <div class="mt-2">
+        <button type="submit" [disabled]="!theme.nomTheme" class="btn btn-success"
+(click)="saveTheme()" >{{ajout ? 'Ajouter' : 'Modifier'}}
+</button>
+    </div>
+</form>

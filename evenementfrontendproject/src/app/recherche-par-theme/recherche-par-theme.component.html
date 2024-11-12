@@ -1,0 +1,41 @@
+<div class="container"> 
+
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4"> 
+        <label>Themes </label> 
+        <select class="form-control form-control-lg" id="idTheme" name="idTheme" [(ngModel)]="IdTheme" (change)="onChange()">
+            <option *ngFor="let th of themes" value="{{th.idTheme}}"> {{th.nomTheme}} </option>
+        </select> 
+    </div>
+
+    <div class="card shadow mb-4"> 
+      <div class="card-body"> 
+        <table class="table"> 
+          <thead> 
+            <tr> 
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Prix</th>
+              <th>Date</th> 
+              <th>Theme</th>
+              <th>Action</th>
+              
+            </tr> 
+          </thead> 
+          <tbody>
+            <tr *ngFor="let evenement of evenements"> 
+              <td>{{ evenement.idEvenement }}</td> 
+              <td>{{ evenement.nomEvenement }}</td> 
+              <td>{{ evenement.prixEvenement }}</td> 
+              <td>{{ evenement.dateEvenement | date: 'dd/MM/yyyy' }}</td> 
+              <td>{{ evenement.theme?.nomTheme }}</td>
+
+              <!-- <td><a class="btn btn-danger" (click)="supprimerEvenement(evenement)">Supprimer</a></td>
+              <td><a class="btn btn-success" [routerLink]="['/updateEvenement',evenement.idEvenement]">Modifier</a></td>
+               -->
+            </tr> 
+          </tbody> 
+        </table> 
+      </div> 
+    </div> 
+  </div>
+  
