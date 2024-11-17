@@ -2,6 +2,7 @@ import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Evenement } from '../models/evenement.model';
 import { Theme } from '../models/theme.models';
+import { Image } from '../models/image.model';
 
 import { Observable } from 'rxjs'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -156,5 +157,40 @@ export class EvenementService {
   ajouterTheme( th: Theme):Observable<Theme>{
     return this.http.post<Theme>(this.apiURLTheme, th, httpOptions);
     }
+
+  uploadImage(file: File, filename: string): Observable<Image> {
+    const imageFormData = new FormData();
+    imageFormData.append('image', file, filename);
+    const url = `${apiURL + '/image/upload'}`;
+    return this.http.post<Image>(url, imageFormData);
+  }
+
+  loadImage(id: number): Observable<Image> {
+    const url = `${this.apiURL + '/image/get/info'}/${id}`;
+    return this.http.get<Image>(url);
+  }
+
+  uploadImageEv(file: File, filename: string, idEv: number): Observable<any> { 
+    const imageFormData = new FormData(); 
+    imageFormData.append('image', file, filename); 
+    const url = `${this.apiURL + '/image/uplaodImageEv'}/${idEv}`; 
+    
+    return this.http.post(url, imageFormData); 
+  }
+
+  supprimerImage(id : number) { 
+    const url = `${this.apiURL}/image/delete/${id}`; 
+    return this.http.delete(url, httpOptions); 
+  }
+
+  uploadImageFS(file: File, filename: string, idEv : number): Observable<any>{ 
+    const imageFormData = new FormData(); 
+    
+    imageFormData.append('image', file, filename); 
+    const url = `${this.apiURL + '/image/uploadFS'}/${idEv}`; 
+    
+    return this.http.post(url, imageFormData); 
+  }
+
     
 }

@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { EvenementGuard } from './evenement.guard';
 import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
 
 const routes: Routes = [
   {path: "evenements", component : EvenementComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: "listeThemes", component : ListeThemesComponent},
   {path: 'login', component: LoginComponent},
   {path: 'app-forbidden', component: ForbiddenComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  { path: 'verifEmail', component: VerifEmailComponent }
 ];
 
 @NgModule({

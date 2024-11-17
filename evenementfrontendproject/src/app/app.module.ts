@@ -24,7 +24,9 @@ import { EvenementGuard } from './evenement.guard';
 
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
-
+import { VerifEmailComponent } from './verif-email/verif-email.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -42,13 +44,16 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     ForbiddenComponent,
     RegisterComponent,
+    VerifEmailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     provideClientHydration(),

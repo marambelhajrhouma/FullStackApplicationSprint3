@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,10 +26,17 @@ public class Evenement {
 	private double prixEvenement;
 	private Date dateEvenement;
 	
+	/*@OneToOne
+	private Image image;*/
+	
+	@OneToMany(mappedBy = "evenement")
+    private List<Image> images;
 	
 	//l evenement que cette particpant le participe
 	@ManyToOne //optional
 	private Theme theme;
+	
+	private String imagePath;
 
 	//Constructor
 	public Evenement(String nomEvenement, String description, double prixEvenement, Date dateEvenement) {

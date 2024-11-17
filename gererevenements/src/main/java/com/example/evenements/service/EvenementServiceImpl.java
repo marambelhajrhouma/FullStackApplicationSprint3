@@ -1,5 +1,8 @@
 package com.example.evenements.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +12,16 @@ import org.springframework.stereotype.Service;
 import com.example.evenements.entities.Evenement;
 import com.example.evenements.entities.Theme;
 import com.example.evenements.repos.EvenementRepository;
+import com.example.evenements.repos.ImageRepository;
 
 @Service
 public class EvenementServiceImpl implements EvenementService{
 
 	@Autowired
 	EvenementRepository evenementRepository;
+	
+	@Autowired
+	ImageRepository imageRepository;
 	
 	//@PreAuthorize("hasAuthority('ADMIN')")
 	@Override
@@ -23,9 +30,21 @@ public class EvenementServiceImpl implements EvenementService{
 		return evenementRepository.save(ev) ;
 	}
 
+	/*
 	@Override
 	public Evenement upadteEvenement(Evenement ev) {
 		return evenementRepository.save(ev) ;
+	}*/
+	
+	@Override
+	public Evenement upadteEvenement(Evenement ev) {
+		//Long oldEvImageId = this.getEvenement(ev.getIdEvenement()).getImage().getIdImage();
+		//Long newEvImageId = ev.getImage().getIdImage();
+		Evenement evUpdated = evenementRepository.save(ev);
+		//if (oldEvImageId != newEvImageId)  // si l'image a été modifiée
+			//imageRepository.deleteById(oldEvImageId);
+		
+		return evUpdated;
 	}
 
 	@Override
@@ -35,6 +54,13 @@ public class EvenementServiceImpl implements EvenementService{
 
 	@Override
 	public void deleteEvenementById(Long id) {
+		Evenement ev = getEvenement(id);
+		//suuprimer l'image avant de supprimer le produit
+		try {
+			Files.delete(Paths.get(System.getProperty("user.home")+"/imagesEvenements/"+ev.getImagePath()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		evenementRepository.deleteById(id) ;
 	}
 

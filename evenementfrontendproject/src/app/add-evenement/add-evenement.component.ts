@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Evenement } from '../models/evenement.model';
+import { Image } from '../models/image.model';
+
 import { EvenementService } from '../services/evenement.service';
 import { Theme } from '../models/theme.models';
 import { Router } from '@angular/router';
@@ -15,6 +17,9 @@ export class AddEvenementComponent {
   themes!: Theme[];
   newIdTheme!: number;
   newTheme!: Theme;
+
+  uploadedImage!: File;
+  imagePath: any;
 
   constructor(private evenementService: EvenementService, private router :Router) {}
 
@@ -37,15 +42,37 @@ export class AddEvenementComponent {
     this.router.navigate(['evenements']);
   }*/
 
-    addEvenement(){ 
-      
-      //je vais cherecher l'id de theme choisi par l'utilisateur
-      this.newEvenement.theme = this.themes.find(th => th.idTheme == this.newIdTheme)!;
-      this.evenementService.ajouterEvenement(this.newEvenement) 
-      .subscribe(ev => { 
-        console.log(ev); 
+/*    addEvenement() {
+    this.evenementService
+      .uploadImage(this.uploadedImage, this.uploadedImage.name)
+      .subscribe((img: Image) => {
+        this.newEvenement.image = img;
+        this.newEvenement.theme = this.themes.find(th => th.idTheme
+          == this.newIdTheme)!;
+        this.evenementService
+          .ajouterEvenement(this.newEvenement)
+          .subscribe(() => {
+            this.router.navigate(['evenements']);
+          });
+      });
+  }*/
+
+  addEvenement() {
+    this.newEvenement.theme = this.themes.find(
+      th => th.idTheme == this.newIdTheme)!;
+    this.evenementService.ajouterEvenement(this.newEvenement)
+      .subscribe((ev) => {
+        this.evenementService.uploadImageFS(this.uploadedImage, this.uploadedImage.name, ev.idEvenement)
+          .subscribe((response: any) => { });
         this.router.navigate(['evenements']);
-      }); 
-    }
+      });
+  }
+
+  onImageUpload(event: any) {
+    this.uploadedImage = event.target.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(this.uploadedImage);
+    reader.onload = (_event) => { this.imagePath = reader.result; }
+  }
 
 }

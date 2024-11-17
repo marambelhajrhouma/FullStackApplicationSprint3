@@ -11,7 +11,7 @@ export class AuthService {
   apiURL: string = 'http://localhost:8008/users';
   token!:string;
   private helper = new JwtHelperService();
-
+  public regitredUser: User = new User();
 
   /*users: User[] = [{ "username": "admin", "password": "123", "roles": ['ADMIN'] },
                    { "username": "maram", "password": "123", "roles": ['USER','ADMIN'] }];
@@ -23,6 +23,14 @@ export class AuthService {
 
   constructor(private router: Router,
               private http : HttpClient) { }
+ 
+  setRegistredUser(user: User) { 
+    this.regitredUser = user; 
+  } 
+  
+  getRegistredUser() { 
+    return this.regitredUser; 
+  }
 
   //sprint2
   login(user: User) {
@@ -110,5 +118,9 @@ export class AuthService {
   //register
   registerUser(user: User) { 
     return this.http.post<User>(this.apiURL + '/register', user, { observe: 'response' }); 
+  }
+
+  validateEmail(code: string) { 
+    return this.http.get<User>(this.apiURL + '/verifyEmail/' + code); 
   }
 }
