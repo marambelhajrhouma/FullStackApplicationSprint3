@@ -42,7 +42,8 @@ export class AddEvenementComponent {
     this.router.navigate(['evenements']);
   }*/
 
-/*    addEvenement() {
+/****le code de add evenement pour plusieurs photos */
+/*addEvenement() {
     this.evenementService
       .uploadImage(this.uploadedImage, this.uploadedImage.name)
       .subscribe((img: Image) => {
@@ -57,7 +58,28 @@ export class AddEvenementComponent {
       });
   }*/
 
-  addEvenement() {
+      /***supp */ //recette categorie
+      addEvenement() {
+        this.newEvenement.theme = this.themes.find(th => th.idTheme == this.newIdTheme)!;
+        this.evenementService.ajouterEvenement(this.newEvenement).subscribe((ev) => {
+            if (this.uploadedImage) {
+                this.evenementService.uploadImageEv(this.uploadedImage, this.uploadedImage.name, ev.idEvenement!)
+                    .subscribe((response: any) => {
+                        console.log("Image uploadée et associée à l'ingrédient", response);
+                        this.router.navigate(['evenements']);
+                    }, (error) => {
+                        console.error("Erreur lors du téléchargement de l'image :", error);
+                    });
+            } else {
+                this.router.navigate(['evenements']);
+            }
+        });
+    }
+
+
+
+  /******Les lignes de codes pour stocker une images dans le file imagesEvenements*******/
+  /*addEvenement() {
     this.newEvenement.theme = this.themes.find(
       th => th.idTheme == this.newIdTheme)!;
     this.evenementService.ajouterEvenement(this.newEvenement)
@@ -66,8 +88,8 @@ export class AddEvenementComponent {
           .subscribe((response: any) => { });
         this.router.navigate(['evenements']);
       });
-  }
-
+  }*/
+  /*************** */
   onImageUpload(event: any) {
     this.uploadedImage = event.target.files[0];
     var reader = new FileReader();

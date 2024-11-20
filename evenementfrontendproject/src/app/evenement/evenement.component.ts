@@ -31,7 +31,8 @@ export class EvenementComponent {
       this.evenementService.supprimerEvenement(ev);
   }*/
   
-  /*  chargerEvenement() {
+  /****le code de add evenement pour plusieurs photos */
+  /*chargerEvenement() {
     this.evenementService.listeEvenement().subscribe(evs => {
       console.log(evs);
       this.evenements = evs;
@@ -39,18 +40,76 @@ export class EvenementComponent {
       this.evenements.forEach((ev) => {
         this.evenementService.loadImage(ev.image.idImage)
           .subscribe((img: Image) => {
-            ev.imageStr = 'data:' + img.type + ';base64,' + img.image;
+            //ev.imageStr = 'data:' + img.type + ';base64,' + img.image;
+            //ev.imageStr = 'data:' + img.type + ';base64,' + img.image;
+            //ev.imageStr = 'data:' + ev.images[0].type + ';base64,' +  ev.images[0].image;
           });
+          
+          ev.imageStr = 'data:' + ev.images[0].type + ';base64,' +  ev.images[0].image;
+           
       });
     });
   }*/
+    /*chargerEvenement() {
+      this.evenementService.listeEvenement().subscribe(evs => {
+        console.log(evs);
+        this.evenements = evs;
+        this.evenements.forEach((ev) => {
+          ev.imageStr = 'data:' + ev.images[0].type + ';base64,' + ev.images[0].image;
+        });
+      });
+    }*/
+      chargerEvenement() {
+        this.evenementService.listeEvenement().subscribe(evs => {
+          console.log(evs);
+          this.evenements = evs;
+          this.evenements.forEach((ev) => {
+            // Check if images array exists and has at least one element
+            if (ev.images && ev.images.length > 0 && ev.images[0]) {
+              ev.imageStr = 'data:' + ev.images[0].type + ';base64,' + ev.images[0].image;
+            } else {
+              // Set a default image or placeholder if no image is available
+              ev.imageStr = 'assets/default-image.png'; // or any default image path
+              console.log(`No image found for event: ${ev.nomEvenement}`);
+            }
+          });
+        });
+      }
 
-    chargerEvenement() {
+ //supp
+/* chargerIngredients(): void {
+  this.evenementService.listeEvenement().subscribe((evs) => {
+    this.evenements = evs;
+
+    // Fetch image for each ingredient
+    this.evenements?.forEach((ev) => {
+      if (ev.idEvenement) {
+        this.evenementService
+          .loadImage(ev.idEvenement)
+          .subscribe((img: Image[]) => {
+            // Check if an image is available
+            if (img.length > 0) {
+              ev.imageStr =
+                'data:' + img[0].type + ';base64,' + img[0].image;
+            } else {
+              ev.imageStr = ''; // Initialize with empty string if no image
+              console.log(
+                `No image found for ingredient ${ev.nomEvenement}`
+              );
+            }
+          });
+      }
+    });
+  });
+}*/
+
+  /******Les lignes de codes pour stocker une images dans le file imagesEvenements*******/
+    /*chargerEvenement() {
     this.evenementService.listeEvenement()
       .subscribe(evs => {
         this.evenements = evs;
       });
-    }
+    }*/
 
   supprimerEvenement(ev: Evenement) {
     let conf = confirm("Etes-vous sûr ?");

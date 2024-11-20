@@ -21,8 +21,11 @@
               <td>{{ evenement.prixEvenement }}</td> 
               <td>{{ evenement.dateEvenement | date: 'dd/MM/yyyy' }}</td> 
               <td>{{ evenement.theme?.nomTheme }}</td>
+              
+              <!--/******Les lignes de codes pour stocker une images dans le file imagesEvenements*******/-->
+                <!--src="{{apiurl+'/image/loadfromFS/'+evenement.idEvenement}}" -->
               <td><img class="card-img-top img-responsive" 
-                  src="{{apiurl+'/image/loadfromFS/'+evenement.idEvenement}}" 
+                  src="{{evenement.imageStr}}"
                   style = "height :50px;width:100px"> 
               </td>
 

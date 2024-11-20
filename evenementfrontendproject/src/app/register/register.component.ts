@@ -40,7 +40,8 @@ export class RegisterComponent implements OnInit {
       );
   }
   
-  onRegister() {
+  /*
+ onRegister() {
     this.loading=true;
     
     this.authService.registerUser(this.user).subscribe({
@@ -64,7 +65,8 @@ export class RegisterComponent implements OnInit {
         // this.router.navigate(["/verifEmail", this.user.email]);
       },
       error: (err: any) => {
-        if (err.error.errorCode=="USER_EMAIL_ALREADY_EXISTS") {
+        console.log(err);
+        if (err.error.errorCode==="USER_EMAIL_ALREADY_EXISTS") {
           // Assuming the backend sends an error message in `err.error.message`
           this.err = "Email already used";
         } else {
@@ -73,8 +75,68 @@ export class RegisterComponent implements OnInit {
         }
       }
     });
+  }*/
+ /*   onRegister() {
+      this.loading = true;
+  
+      this.authService.registerUser(this.user).subscribe({
+          next: (res) => {
+              this.authService.setRegistredUser(this.user);
+              Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Veuillez confirmer votre email',
+                  showConfirmButton: false,
+                  timer: 1500,
+              });
+              this.router.navigate(['/verifEmail']);
+              this.loading = false;
+          },
+          error: (err: any) => {
+              this.loading = false;
+              if (err.error.errorCode === 'USER_EMAIL_ALREADY_EXISTS') {
+                  this.err = 'Email déjà utilisé!';
+                  this.toastr.error(this.err, 'Erreur');
+              } else {
+                  this.err = 'Une erreur inconnue est survenue. Veuillez réessayer.';
+                  console.error(err);
+              }
+          }
+      });
+  }
+*/
+
+
+
+  onRegister() {
+    console.log("Registering user...");
+    this.loading = true;
+    this.authService.registerUser(this.user).subscribe({
+      next: (res) => {
+        this.authService.setRegistredUser(this.user);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Veuillez confirmer votre email',
+          showConfirmButton: false,
+          timer: 1500,
+      });
+        this.loading = false;
+       // this.toastr.success('Veillez confirmer votre email', 'Confirmation');
+        
+       this.router.navigate(["/verifEmail"]);
+      },
+      error: (err: any) => {
+        this.loading = false; 
+        if (err.error.message === "Email déjà existant!") { // Match the exact message from the backend
+          this.err = "Email already in use!";
+        } else {
+          this.err = "An error occurred. Please try again.";
+        }
+      }
+    });
   }
   
-
+ 
 
 }

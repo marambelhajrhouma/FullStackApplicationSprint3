@@ -183,14 +183,16 @@ export class EvenementService {
     return this.http.delete(url, httpOptions); 
   }
 
-  uploadImageFS(file: File, filename: string, idEv : number): Observable<any>{ 
+  /******Les lignes de codes pour stocker une images dans le file imagesEvenements*******/
+  /*uploadImageFS(file: File, filename: string, idEv : number): Observable<any>{ 
     const imageFormData = new FormData(); 
     
     imageFormData.append('image', file, filename); 
     const url = `${this.apiURL + '/image/uploadFS'}/${idEv}`; 
     
     return this.http.post(url, imageFormData); 
-  }
+  }*/
+ /**************** */
 
     
 }

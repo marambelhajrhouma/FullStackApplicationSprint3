@@ -123,4 +123,6 @@ export class AuthService {
   validateEmail(code: string) { 
     return this.http.get<User>(this.apiURL + '/verifyEmail/' + code); 
   }
+
+  
 }

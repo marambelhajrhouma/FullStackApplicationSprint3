@@ -2,7 +2,7 @@ import { Theme } from "./theme.models";
 import { Image } from "./image.model";
 
 export class Evenement{
-    idEvenement!: number; // ! ce champs peut etre vide
+    idEvenement!: number; 
     nomEvenement!: string;
     prixEvenement!: number;
     dateEvenement!: Date;

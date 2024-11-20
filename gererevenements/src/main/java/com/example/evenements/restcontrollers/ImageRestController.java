@@ -85,7 +85,8 @@ public class ImageRestController {
 				+ "/imagesEvenements/" + ev.getImagePath()));
 	}*/
 	
-	@RequestMapping(value = "/uploadFS/{id}", method = RequestMethod.POST)
+	/******Les lignes de codes pour stocker une images dans le file imagesEvenements*******/
+	/*@RequestMapping(value = "/uploadFS/{id}", method = RequestMethod.POST)
 	public void uploadImageFS(@RequestParam("image") MultipartFile file, @PathVariable("id") Long id)
 	       throws IOException {
 	   String uploadDir = System.getProperty("user.home") + "/imagesEvenements";
@@ -138,11 +139,7 @@ public class ImageRestController {
 	    String fullPath = System.getProperty("user.home") + "/imagesEvenements/" + ev.getImagePath();
 	    Path imagePath = Paths.get(fullPath);
 	    
-	    // Afficher les informations de débogage
-	    System.out.println("Chemin complet: " + fullPath);
-	    System.out.println("Le fichier existe: " + Files.exists(imagePath));
-	    System.out.println("Le dossier existe: " + Files.exists(Paths.get(System.getProperty("user.home") + "/imagesEvenements")));
-	    
+	  
 	    // Lister les fichiers dans le dossier
 	    Files.list(Paths.get(System.getProperty("user.home") + "/imagesEvenements"))
 	         .forEach(file -> System.out.println("Fichier trouvé: " + file.getFileName()));
@@ -153,6 +150,7 @@ public class ImageRestController {
 	    }
 	    
 	    return Files.readAllBytes(imagePath);
-	}
+	}*/
+	/******************/
 	
 }
